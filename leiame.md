@@ -6,3 +6,4 @@
 
 ## Instalação do Nodemon
 - No terminal digite: npm install nodemon -D
+
