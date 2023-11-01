@@ -7,3 +7,5 @@
 ## Instalação do Nodemon
 - No terminal digite: npm install nodemon -D
 
+## Inicia servidor
+- No terminal digite: npm run dev
