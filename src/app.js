@@ -6,23 +6,23 @@ const app = express();
 app.use(express.json());
 
 // mock
-const linguagensDeProg = [
-   {id: 1, linguagensDeProg: 'Java'},
-   {id: 2, linguagensDeProg: 'C#'},
-   {id: 3, linguagensDeProg: 'PHP'},
-   {id: 4, linguagensDeProg: 'HTML5'},
-   {id: 5, linguagensDeProg: 'CSS3'},
-   {id: 6, linguagensDeProg: 'JavaScript'}
+const tecnologias = [
+   {id: 1, tecnologias: 'Java', grupo: 'Programacao'},
+   {id: 2, tecnologias: 'C#', grupo: 'Programacao'},
+   {id: 3, tecnologias: 'NodeJs', grupo: 'Framework'},
+   {id: 4, tecnologias: 'PHP', grupo: 'Programacao'},
+   {id: 5, tecnologias: 'React', grupo: 'Framework'},
+   {id: 6, tecnologias: 'VueJs', grupo: 'Framework'},
 ] 
 
 // retorna o objeto por id
-function buscarLinguagensDeProgPorId(id){
-  return linguagensDeProg.filter(linguagensDeProg => linguagensDeProg.id == id)  
+function buscarTecnologiasPorId(id){
+  return tecnologias.filter(tecnologias => tecnologias.id == id)  
 }
 
 // pegar a posição ou index do elemento no array por id
-function buscarIndexLinguagensDeProg(id){
-  return linguagensDeProg.findIndex(linguagensDeProg => linguagensDeProg.id == id)  
+function buscarIndexTecnologias(id){
+  return tecnologias.findIndex(tecnologias => tecnologias.id == id)  
 }
 
 // criar rota padrão
@@ -30,23 +30,32 @@ app.get('/', (req, res) => {
     res.send('Olá mundo, bem vindo ao Curso de Nodejs!');
 });
 
-app.get('/linguagensDeProg', (req, res) => {
-    res.status(200).send(linguagensDeProg);
+app.get('/tecnologias', (req, res) => {
+    res.status(200).send(tecnologias);
 });
 
-app.get('/linguagensDeProg/:id', (req, res) => {
-    res.json(buscarLinguagensDeProgPorId(req.params.id));
+app.get('/tecnologias/:id', (req, res) => {
+    res.json(buscarTecnologiasPorId(req.params.id));
 });
 
-app.post('/linguagensDeProg', (req, res) => {
-    frameworks.push(req.body);
-    res.status(201).send('Framework cadastrado com sucesso!');
+app.post('/tecnologias', (req, res) => {
+    tecnologias.push(req.body);
+    res.status(201).send('Tecnologias cadastradas com sucesso!');
 });
 
-app.delete('/linguagensDeProg/:id', (req, res) => {
-    let index = buscarIndexLinguagensDeProg(req.params.id);
-    linguagensDeProg.splice(index, 1);
-    res.send(`Linguagem de Programação com id ${req.params.id} excluida com sucesso!`);
+//Deletar por id
+app.delete('/tecnologias/:id', (req, res) => {
+    let index = buscarIndexTecnologias(req.params.id);
+    tecnologias.splice(index, 1);
+    res.send(`Tecnologias com id ${req.params.id} excluida com sucesso!`);
+});
+
+//Atualizar por id
+app.put('/tecnologias/:id', (req, res) => {
+    let index = buscarIndexTecnologias(req.params.id);
+    tecnologias[index].tecnologias = req.body.tecnologias;
+    tecnologias[index].grupo       = req.body.grupo;
+    res.json(tecnologias);
 });
 
 export default app;
